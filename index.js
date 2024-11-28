@@ -34,6 +34,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "you seem lost..." });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("server is running 🤘");
 });
