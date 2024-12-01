@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/characters", async (req, res) => {
   try {
     //en query attendu num de page, search
-    console.log(req.query);
+    // console.log(req.query);
     const { page, search, limit } = req.query;
     if (limit) {
       toSkip = (page - 1) * limit;
@@ -20,7 +20,7 @@ router.get("/characters", async (req, res) => {
         limit ? limit : 100
       }`
     );
-    console.log(response.data);
+    // console.log(response.data);
 
     res.status(201).json(response.data);
   } catch (error) {

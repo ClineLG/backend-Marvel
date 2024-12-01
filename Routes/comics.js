@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/comics", async (req, res) => {
   try {
-    console.log(req.query);
+    // console.log(req.query);
     const { page, search, limit } = req.query;
     if (limit) {
       toSkip = (page - 1) * limit;
@@ -42,14 +42,14 @@ router.get("/comic/:comicId", async (req, res) => {
 });
 router.get("/comic/characters/:comicId", async (req, res) => {
   try {
-    console.log(req.params);
+    // console.log(req.params);
     const comicToSeek = req.params.comicId;
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.MARVEL_API_KEY}`
     );
-    console.log(response.data.count);
+    // console.log(response.data.count);
     const numberCharacters = response.data.count;
-    console.log(Math.ceil(numberCharacters / 100));
+    // console.log(Math.ceil(numberCharacters / 100));
 
     const numberOfPages = Math.ceil(numberCharacters / 100); //15
     const tab = [];

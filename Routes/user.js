@@ -39,8 +39,6 @@ router.post("/signUp", async (req, res) => {
     const hash = SHA256(password + salt).toString(encBase64);
     const token = uid2(42);
 
-    //call n2 de front pour choisir photo call /characters : perso photo send , pouvoir choisir photo
-
     const newUser = new User({
       email: email,
       account: {
@@ -163,23 +161,17 @@ router.get("/favories", isAuthenticated, async (req, res) => {
 router.delete("/favories/:idFavToDelete", isAuthenticated, async (req, res) => {
   try {
     const userFav = await User.findById(req.user._id).select("favories");
-    // console.log("params", req.params, "usesrF", userFav);
     const newFav = [];
-    console.log(userFav.favories.length);
-    // console.log(newFav);
+
     for (let i = 0; i < userFav.favories.length; i++) {
       if (userFav.favories[i]._id !== req.params.idFavToDelete) {
-        // console.log(i);
-        console.log(userFav.favories[i]._id);
         newFav.push(userFav.favories[i]);
       }
     }
 
-    console.log("newFav:", newFav);
     userFav.favories = newFav;
     await userFav.save();
-    // console.log("UserToUpdate", userFav);
-    // console.log(userFav);
+
     res.status(200).json(userFav);
   } catch (error) {
     res.status(500).json({ message: error.message });
